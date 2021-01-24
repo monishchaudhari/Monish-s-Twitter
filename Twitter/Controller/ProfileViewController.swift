@@ -39,7 +39,7 @@ class MyProfileViewController: UIViewController, UITableViewDataSource, UITableV
     
     //MARK:- Other Functions
     func updateUIlements() {
-        largeUsernameTitle.text = currentUser.user?.username
+        largeUsernameTitle.text = "@\(currentUser.user?.username ?? "")"
         
         if (currentUser.user?.name?.split(separator: " ").count ?? 0) == 2 {
             userFullNameLabel.text = currentUser.user?.name?.replacingOccurrences(of: " ", with: "\n").capitalized

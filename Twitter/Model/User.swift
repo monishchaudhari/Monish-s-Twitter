@@ -8,7 +8,7 @@
 
 import Foundation
 
-class LoggedInUser: NSObject {
+class LoggedInUser: NSObject, Codable {
     
     static let shared = LoggedInUser()
     
@@ -20,6 +20,7 @@ class LoggedInUser: NSObject {
         user = nil
         followers = nil
         followings = nil
+        UserDefaults.standard.removeObject(forKey: UserDefaultEnum.User.rawValue)
     }
 }
 
@@ -38,4 +39,8 @@ class Follow: NSObject, Codable {
 class Meta: NSObject, Codable {
     var result_count:Int?
     var next_token:String?
+}
+
+public enum UserDefaultEnum: String {
+    case User = "LoggedInUser"
 }

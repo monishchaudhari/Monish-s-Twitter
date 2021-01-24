@@ -15,7 +15,6 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     
-    
     //MARK:- Local variables
     
     //MARK:- Life Cycle
@@ -23,16 +22,8 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        usernameTextField.becomeFirstResponder()
         loginButton.layer.cornerRadius = 5.0
-        
-        #if DEBUG
-        usernameTextField.text = "ChaudharyMonish"
-        #endif
+        checkDataForAutoLogin()
     }
     
     deinit {
@@ -40,6 +31,43 @@ class LoginViewController: UIViewController {
     }
     
     //MARK:- Other Functions
+    func checkDataForAutoLogin() {
+        let launchView:OtherLaunchScreenView = Bundle.main.loadNibNamed("OtherLaunchScreenView", owner: self, options: nil)![0] as! OtherLaunchScreenView
+        launchView.frame = self.view.bounds
+        self.view.addSubview(launchView)
+        self.navigationController?.navigationBar.isHidden = true
+        
+        if UserDefaults.standard.value(forKey: UserDefaultEnum.User.rawValue) != nil {
+            
+            retriveDataForOfflineusage()
+            
+            let group = DispatchGroup()
+            if let userID = LoggedInUser.shared.user?.id {
+                group.enter()
+                self.getFollowersFor(userID: userID) { (status) in
+                    group.leave()
+                }
+                
+                group.enter()
+                self.getFollowingsFor(userID: userID) { (status) in
+                    group.leave()
+                }
+            }
+            
+            group.notify(queue: .main) {
+                DispatchQueue.main.async {
+                    launchView.removeLaunchView()
+                    self.navigationController?.navigationBar.isHidden = true
+                    let ProfileVC = UIStoryboard(name: "Main", bundle: .main).instantiateViewController(identifier: "MyProfileViewController") as! MyProfileViewController
+                    self.navigationController?.pushViewController(ProfileVC, animated: true)
+                }
+            }
+        } else {
+            self.navigationController?.navigationBar.isHidden = false
+            launchView.removeLaunchView()
+        }
+    }
+    
     func getFollowersFor(userID:String, completionHandler: @escaping (_ status: Bool) -> Void) {
         
         _ = APIManager.shared.makeAPICall(
@@ -71,6 +99,10 @@ class LoginViewController: UIViewController {
                         completionHandler(false)
                     }
                     break
+                }
+            } else {
+                DispatchQueue.main.async{
+                    completionHandler(false)
                 }
             }
         }
@@ -107,6 +139,10 @@ class LoginViewController: UIViewController {
                     }
                     break
                 }
+            } else {
+                DispatchQueue.main.async{
+                    completionHandler(false)
+                }
             }
         }
     }
@@ -123,6 +159,26 @@ class LoginViewController: UIViewController {
             user.username = userName
         }
         return user
+    }
+    
+    func saveDataForOfflineUsage() {
+        let encoder = JSONEncoder()
+        if let encoded = try? encoder.encode(LoggedInUser.shared) {
+            let defaults = UserDefaults.standard
+            defaults.set(encoded, forKey: UserDefaultEnum.User.rawValue)
+        }
+    }
+    
+    func retriveDataForOfflineusage() {
+        if let savedUser = UserDefaults.standard.object(forKey: UserDefaultEnum.User.rawValue) as? Data {
+            let decoder = JSONDecoder()
+            if let loadedUser = try? decoder.decode(LoggedInUser.self, from: savedUser) {
+                LoggedInUser.shared.user = loadedUser.user
+                LoggedInUser.shared.followers = loadedUser.followers
+                LoggedInUser.shared.followings = loadedUser.followings
+                
+            }
+        }
     }
     
     //MARK:- IBActions
@@ -172,6 +228,7 @@ class LoginViewController: UIViewController {
                                 group.notify(queue: .main) {
                                     DispatchQueue.main.async {
                                         loaderView.removeLoader()
+                                        vc.saveDataForOfflineUsage()
                                         vc.navigationController?.navigationBar.isHidden = true
                                         let ProfileVC = UIStoryboard(name: "Main", bundle: .main).instantiateViewController(identifier: "MyProfileViewController") as! MyProfileViewController
                                         vc.navigationController?.pushViewController(ProfileVC, animated: true)

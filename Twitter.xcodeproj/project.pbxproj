@@ -10,6 +10,8 @@
 		D230829725BDADFD00265089 /* OtherProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D230829625BDADFD00265089 /* OtherProfileViewController.swift */; };
 		D230829925BDB8C900265089 /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D230829825BDB8C900265089 /* Loader.swift */; };
 		D230829B25BDB8E200265089 /* Loader.xib in Resources */ = {isa = PBXBuildFile; fileRef = D230829A25BDB8E200265089 /* Loader.xib */; };
+		D2E923D525BDC35F003C6FD2 /* OtherLaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E923D425BDC35F003C6FD2 /* OtherLaunchScreenView.swift */; };
+		D2E923D725BDC36D003C6FD2 /* OtherLaunchScreenView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2E923D625BDC36D003C6FD2 /* OtherLaunchScreenView.xib */; };
 		D2EA825125BD3CA30071D00C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2EA825025BD3CA30071D00C /* LoginViewController.swift */; };
 		D2EA825325BD3CAC0071D00C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2EA825225BD3CAC0071D00C /* ProfileViewController.swift */; };
 		D2EA825525BD3E5F0071D00C /* MyExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2EA825425BD3E5F0071D00C /* MyExtensions.swift */; };
@@ -25,6 +27,8 @@
 		D230829625BDADFD00265089 /* OtherProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherProfileViewController.swift; sourceTree = "<group>"; };
 		D230829825BDB8C900265089 /* Loader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
 		D230829A25BDB8E200265089 /* Loader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Loader.xib; sourceTree = "<group>"; };
+		D2E923D425BDC35F003C6FD2 /* OtherLaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherLaunchScreenView.swift; sourceTree = "<group>"; };
+		D2E923D625BDC36D003C6FD2 /* OtherLaunchScreenView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OtherLaunchScreenView.xib; sourceTree = "<group>"; };
 		D2EA825025BD3CA30071D00C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		D2EA825225BD3CAC0071D00C /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		D2EA825425BD3E5F0071D00C /* MyExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyExtensions.swift; sourceTree = "<group>"; };
@@ -94,6 +98,8 @@
 				D2F3B7A025BC8D69007FE697 /* LaunchScreen.storyboard */,
 				D230829825BDB8C900265089 /* Loader.swift */,
 				D230829A25BDB8E200265089 /* Loader.xib */,
+				D2E923D425BDC35F003C6FD2 /* OtherLaunchScreenView.swift */,
+				D2E923D625BDC36D003C6FD2 /* OtherLaunchScreenView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -175,6 +181,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2E923D725BDC36D003C6FD2 /* OtherLaunchScreenView.xib in Resources */,
 				D2F3B7A225BC8D69007FE697 /* LaunchScreen.storyboard in Resources */,
 				D2F3B79F25BC8D69007FE697 /* Assets.xcassets in Resources */,
 				D230829B25BDB8E200265089 /* Loader.xib in Resources */,
@@ -196,6 +203,7 @@
 				D230829725BDADFD00265089 /* OtherProfileViewController.swift in Sources */,
 				D2F3B86025BC972F007FE697 /* APIManager.swift in Sources */,
 				D230829925BDB8C900265089 /* Loader.swift in Sources */,
+				D2E923D525BDC35F003C6FD2 /* OtherLaunchScreenView.swift in Sources */,
 				D2F3B79625BC8D67007FE697 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
