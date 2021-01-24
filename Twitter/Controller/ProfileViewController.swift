@@ -1,5 +1,5 @@
 //
-//  ProfileViewController.swift
+//  MyProfileViewController.swift
 //  Twitter
 //
 //  Created by Monish Chaudhari on 24/01/21.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class MyProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     //MARK:- IBOutlets
     @IBOutlet weak var tableView: UITableView!
@@ -70,23 +70,14 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func showProfileOf(user:User) {
         DispatchQueue.main.async {
-            let ProfileVC = UIStoryboard(name: "Main", bundle: .main).instantiateViewController(identifier: "ProfileViewController") as! ProfileViewController
-            
+            let ProfileVC = UIStoryboard(name: "Main", bundle: .main).instantiateViewController(identifier: "OtherProfileViewController") as! OtherProfileViewController
+            ProfileVC.user = user
             self.present(ProfileVC, animated: true) {
-                ProfileVC.largeUsernameTitle.text = user.username
                 
-                if (user.name?.split(separator: " ").count ?? 0) == 2 {
-                    ProfileVC.userFullNameLabel.text = user.name?.replacingOccurrences(of: " ", with: "\n").capitalized
-                } else {
-                    ProfileVC.userFullNameLabel.text = user.name?.capitalized
-                }
-                
-                ProfileVC.followSegmentControl.isHidden = true
-                ProfileVC.tableView.isHidden = true
-                ProfileVC.bottomStatusBarLabel.text = "Showing User Profile."
             }
         }
     }
+    
     //MARK:- IBActions
     @IBAction func didTapBackButton(_ sender: UIButton) {
         if self.navigationController != nil {
@@ -134,12 +125,12 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         if followSegmentControl.selectedSegmentIndex == 0 {
             if let folloWData = currentUser.followers?.data?[indexPath.row] {
                 cell.textLabel?.text = folloWData.name?.capitalized
-                cell.detailTextLabel?.text = folloWData.username
+                cell.detailTextLabel?.text = "@" + (folloWData.username ?? "Unknown")
             }
         } else {
             if let folloWData = currentUser.followings?.data?[indexPath.row] {
                 cell.textLabel?.text = folloWData.name?.capitalized
-                cell.detailTextLabel?.text = folloWData.username
+                cell.detailTextLabel?.text = "@" + (folloWData.username ?? "Unknown")
             }
         }
         return cell

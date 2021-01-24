@@ -28,6 +28,7 @@ class LoginViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         usernameTextField.becomeFirstResponder()
+        loginButton.layer.cornerRadius = 5.0
         
         #if DEBUG
         usernameTextField.text = "ChaudharyMonish"
@@ -40,7 +41,6 @@ class LoginViewController: UIViewController {
     
     //MARK:- Other Functions
     func getFollowersFor(userID:String, completionHandler: @escaping (_ status: Bool) -> Void) {
-        guard let userID = LoggedInUser.shared.user?.id else { return }
         
         _ = APIManager.shared.makeAPICall(
             endPoint: userID + APIManager.shared.getFollowers,
@@ -133,6 +133,10 @@ class LoginViewController: UIViewController {
             return
         }
         
+        let loaderView:Loader = Bundle.main.loadNibNamed("Loader", owner: self, options: nil)![0] as! Loader
+        loaderView.frame = self.view.bounds
+        self.view.addSubview(loaderView)
+        
         _ = APIManager.shared.makeAPICall(
             endPoint: APIManager.shared.getUserInfo + usernameTextField.text!,
             method: .GET,
@@ -167,36 +171,36 @@ class LoginViewController: UIViewController {
                                 
                                 group.notify(queue: .main) {
                                     DispatchQueue.main.async {
+                                        loaderView.removeLoader()
                                         vc.navigationController?.navigationBar.isHidden = true
-                                        let ProfileVC = UIStoryboard(name: "Main", bundle: .main).instantiateViewController(identifier: "ProfileViewController") as! ProfileViewController
+                                        let ProfileVC = UIStoryboard(name: "Main", bundle: .main).instantiateViewController(identifier: "MyProfileViewController") as! MyProfileViewController
                                         vc.navigationController?.pushViewController(ProfileVC, animated: true)
                                     }
                                 }
-                                
                             }
                         }
                     }
                     catch let error1 as NSError {
+                        loaderView.removeLoader()
                         vc.showOkAlert(title: "Invalid JSON", message: error1.localizedDescription)
                     }
                     break
                 case 400:
+                    loaderView.removeLoader()
                     vc.showOkAlert(title: "Invalid Username", message: "The user you are looking for is not found.")
                     break
                 case 429:
                     //API call limit exceeded
+                    loaderView.removeLoader()
                     vc.showOkAlert(title: "limit exceeded", message: "You have exceeded the API call limit, Please try7 again after some time.")
                     break
                 default:
                     break
                 }
-                
-                
             } else {
-                
+                loaderView.removeLoader()
                 vc.showOkAlert(title: "", message: error?.localizedDescription ?? "An unexpected error occurred while fetching the user information.")
             }
-            
         }
     }
     

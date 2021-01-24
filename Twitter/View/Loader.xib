@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" restorationIdentifier="Loader" id="iN0-l3-epB" customClass="Loader" customModule="Monish_s_Twitter" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zJH-gI-pqW">
+                    <rect key="frame" x="147" y="388" width="120" height="120"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0mf-xV-89d">
+                            <rect key="frame" x="26.5" y="92" width="67.5" height="18"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="0mf-xV-89d" firstAttribute="centerX" secondItem="zJH-gI-pqW" secondAttribute="centerX" id="02b-xW-vcX"/>
+                        <constraint firstAttribute="bottom" secondItem="0mf-xV-89d" secondAttribute="bottom" constant="10" id="IYR-fy-TTp"/>
+                        <constraint firstAttribute="width" constant="120" id="beW-nC-2BC"/>
+                        <constraint firstAttribute="height" constant="120" id="nY6-sS-9cI"/>
+                    </constraints>
+                </view>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="MJD-uR-GVe">
+                    <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
+                </activityIndicatorView>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <constraints>
+                <constraint firstItem="MJD-uR-GVe" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="7aS-qg-piV"/>
+                <constraint firstItem="zJH-gI-pqW" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="MYS-VS-XkN"/>
+                <constraint firstItem="zJH-gI-pqW" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="htZ-Ws-2gf"/>
+                <constraint firstItem="MJD-uR-GVe" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="kAi-xS-wcM"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="activityIndicator" destination="MJD-uR-GVe" id="fHy-Pm-i6u"/>
+                <outlet property="backSquare" destination="zJH-gI-pqW" id="U1c-wh-RCg"/>
+                <outlet property="messageLabel" destination="0mf-xV-89d" id="6Ns-RW-cTN"/>
+            </connections>
+            <point key="canvasLocation" x="133" y="125"/>
+        </view>
+    </objects>
+</document>
