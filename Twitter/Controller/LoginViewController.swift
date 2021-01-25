@@ -252,6 +252,8 @@ class LoginViewController: UIViewController {
                     vc.showOkAlert(title: "limit exceeded", message: "You have exceeded the API call limit, Please try7 again after some time.")
                     break
                 default:
+                    loaderView.removeLoader()
+                    vc.showOkAlert(title: "", message: error?.localizedDescription ?? "An unexpected error occurred while fetching the user information.")
                     break
                 }
             } else {
