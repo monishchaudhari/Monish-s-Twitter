@@ -55,8 +55,8 @@ class APIManager {
         ///Sending request to the server.
         let task = session.dataTask(with: request as URLRequest, completionHandler: {data, response, error -> Void in
             if(error != nil){
-                if let _error = error as NSError?{
-                    
+                if let error = error as NSError? {
+                    print(error)
                 }
                 completion(nil, error, response) }
             if (data != nil){
@@ -94,8 +94,7 @@ class APIManager {
 }
 
 
-enum RequestMethod : String
-{
+enum RequestMethod: String {
     case GET
     case POST
 }
